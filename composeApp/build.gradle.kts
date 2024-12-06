@@ -103,14 +103,6 @@ android {
     }
 }
 
-dependencies {
-    implementation(libs.androidx.material3.desktop)
-    implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.material3.jvmstubs)
-    debugImplementation(compose.uiTooling)
-}
-
 compose.desktop {
     application {
         mainClass = "compose.project.material3example.MainKt"
