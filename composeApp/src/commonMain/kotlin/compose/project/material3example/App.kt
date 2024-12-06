@@ -4,9 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.foundation.text.input.rememberTextFieldState
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,28 +36,31 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun App() {
     Column(verticalArrangement = Arrangement.spacedBy(25.dp)) {
-        Button()
-        TextField()
+        Buttons()
+        TextFields()
     }
 }
 
 @Composable
-fun Button() {
+fun Buttons() {
     Box(modifier = Modifier.background(Color.White).padding(10.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
             Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
                 Button(elevation = null, onClick = { println("Clicked") }) {
                     Text("Filled")
                 }
+                FilledTonalButton(onClick = { println("Clicked") }) {
+                    Text("Tonal")
+                }
                 Button(
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xFFB0BEC5),
-                        contentColor = MaterialTheme.colors.onSurface
+                        containerColor = Color(0xFFB0BEC5),
+                        contentColor = MaterialTheme.colorScheme.onSurface
                     ), onClick = { println("Clicked") }) {
                     Text("Tonal")
                 }
                 Button(
-                    elevation = ButtonDefaults.elevation(
+                    elevation = ButtonDefaults.elevatedButtonElevation(
                         defaultElevation = 2.dp,
                         pressedElevation = 8.dp,
                         disabledElevation = 0.dp,
@@ -134,7 +137,7 @@ fun Button() {
 }
 
 @Composable
-fun TextField() {
+fun TextFields() {
     Column(verticalArrangement = Arrangement.spacedBy(15.dp)) {
         Text("Text fields")
         TextField(
@@ -143,8 +146,8 @@ fun TextField() {
             label = { Text("Filled") },
             placeholder = { Text("Placeholder") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
-            trailingIcon = { Icon(Icons.Default.Clear, contentDescription = "Clear") }
-            //  (?) supportingText
+            trailingIcon = { Icon(Icons.Default.Clear, contentDescription = "Clear") },
+            supportingText = {Text("SupportingText") },
         )
         TextField(
             state = rememberTextFieldState(),
@@ -153,11 +156,10 @@ fun TextField() {
             placeholder = { Text("Placeholder") },
             isError = true,
         )
-        TextField(
+        OutlinedTextField(
             state = rememberTextFieldState(),
             label = { Text("Outlined") },
             trailingIcon = { Icon(Icons.Default.Clear, contentDescription = "Clear") },
-            colors = TextFieldDefaults.outlinedTextFieldColors()
         )
         TextField(
             state = rememberTextFieldState(),
